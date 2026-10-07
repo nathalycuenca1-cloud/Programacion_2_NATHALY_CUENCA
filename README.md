@@ -77,7 +77,7 @@ El objetivo de este repositorio es organizar y almacenar el trabajo realizado du
 - 🔧 Git
 - 🐙 GitHub
 
-------
+-----
 
 ## 👨‍💻 Autor
 
