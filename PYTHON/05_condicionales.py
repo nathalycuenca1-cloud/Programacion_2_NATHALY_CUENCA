@@ -47,30 +47,17 @@ else:
 
 
 
-peso = float(input("Ingrese el peso del paquete en kilogramos: "))
-zona = input("Ingrese la zona de destino (1, 2, 3): ")
-if zona == "1":
-    if peso <= 5:
-        print("El costo del envío es de $10")
-    elif peso <= 10:
-        print("El costo del envío es de $20")
-    else:
-        print("El costo del envío es de $30")
-elif zona == "2":
-    if peso <= 5:
-        print("El costo del envío es de $15")
-    elif peso <= 10:
-        print("El costo del envío es de $25")
-    else:
-        print("El costo del envío es de $35")
-elif zona == "3":
-    if peso <= 5:
-        print("El costo del envío es de $20")
-    elif peso <= 10:
-        print("El costo del envío es de $30")
-    else:
-        print("El costo del envío es de $40")
+peso = float(input("Ingresa el peso del paquete en kilogramos: "))
+zona = int(input("Ingresa la zona de destino (1, 2 o 3): "))
+
+if zona == 1:
+    costo_total = peso * 5.0
+    print(f"Zona 1 (América) - Costo final del envío: ${costo_total:.2f}")
+elif zona == 2:
+    costo_total = peso * 7.5
+    print(f"Zona 2 (Europa) - Costo final del envío: ${costo_total:.2f}")
+elif zona == 3:
+    costo_total = peso * 10.0
+    print(f"Zona 3 (Resto del mundo) - Costo final del envío: ${costo_total:.2f}")
 else:
-    print("Zona de destino no  es valida")
-
-
+    print("Error: Zona de destino no válida. Debe ser 1, 2 o 3.")
