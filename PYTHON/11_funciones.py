@@ -40,3 +40,13 @@ print(f"combustible: {resultado}")
 
 
 print(f"combustible:{calcular_combustible2(100,15)}")
+
+
+def nave_preparada(combustible):
+    return combustible>=50
+
+
+if nave_preparada(800):
+    print("Nave autorizada para despejar")
+else:
+    print("Nave necesita recarga")

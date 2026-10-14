@@ -10,3 +10,4 @@ while combustible >= 20:
     vuelta+=1
 
 print("Carrera finalizada")    
+
