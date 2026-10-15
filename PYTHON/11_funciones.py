@@ -50,3 +50,4 @@ if nave_preparada(800):
     print("Nave autorizada para despejar")
 else:
     print("Nave necesita recarga")
+    
