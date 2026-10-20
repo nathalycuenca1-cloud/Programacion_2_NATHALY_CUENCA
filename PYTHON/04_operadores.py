@@ -132,6 +132,5 @@ resultado_1 = 10 + 5 * 2
 print("Resultado de 1:", resultado_1)
 resultado_2 = (10 + 5) * 2
 print("Resultado de 2:", resultado_2)
-
 resultado_3 = 10 + 5 * 2 ** 2
 print("Resultado de 3:", resultado_3)

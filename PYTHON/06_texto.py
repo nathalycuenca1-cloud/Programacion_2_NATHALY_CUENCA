@@ -48,3 +48,8 @@ print("El tercer caracter del droide es:" + droide[2])
 print("El cuarto caracter del droide es:" + droide[3])
 print("El quinto caracter del droide es:" + droide[4])
 print("El sexto caracter del droide es:" + droide[-1])
+
+planeta = "       Naboo        "
+print("El planeta es:" + planeta)
+print("El planeta sin espacios es: " + planeta.strip())
+
