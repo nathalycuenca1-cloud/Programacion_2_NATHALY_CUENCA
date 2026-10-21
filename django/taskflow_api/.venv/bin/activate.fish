@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/alumnos/Documents/Programacion_II_Nathaly_Cuenca/django/taskflow_api/taskflow/.venv
+set -gx VIRTUAL_ENV /home/alumnos/Documents/Programacion_II_Nathaly_Cuenca/django/taskflow_api/.venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
