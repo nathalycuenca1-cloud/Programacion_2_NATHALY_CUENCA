@@ -10,4 +10,5 @@ urlpatterns = [
     path("greeting/<str:nombre>/", views.greeting, name="greeting"),
     path("destination/<str:titulo>/<str:nombre>/<str:cargo>", views.destination, name="destination"),
     path("area/<int:base>/<int:altura>", views.area, name="area"),
+    path("leads-like", views.leads_like, name="leads_like"),
     ]
