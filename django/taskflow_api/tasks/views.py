@@ -14,7 +14,7 @@ def home(request):
     """)     
 
 def register(request):
-    """Registro"""
+    """Registro de usuarios"""
     return HttpResponse("Registro de usuarios")
 
 def sobre_nosotros(request):
@@ -34,3 +34,24 @@ def area(request, base, altura):
     """Triangulo"""
     return HttpResponse(
         f"El area del triangiulo:{base*altura/2}")
+
+
+def home(request):
+    contexto = {
+        "titulo": "TaskFlow",
+        "mensaje": "Organiza tus proyectos y tareas en un solo lugar",
+    }
+    return render(request, "tasks/home.html", contexto)
+
+# tasks/views.py
+from django.shortcuts import render
+
+
+def leads_like(request):
+    contexto = {
+        "Titulo": "Estudiante",
+        "Nombre": "Nathaly",
+        "Apellido": "Cuenca"
+    }
+    return render(request, "leads/leads-like.html")
+
