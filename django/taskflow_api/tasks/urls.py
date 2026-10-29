@@ -11,4 +11,11 @@ urlpatterns = [
     path("destination/<str:titulo>/<str:nombre>/<str:cargo>", views.destination, name="destination"),
     path("area/<int:base>/<int:altura>", views.area, name="area"),
     path("leads-like", views.leads_like, name="leads_like"),
+    path("task/lista", views.lista, name="task-lista"),
+    path("task/new", views.lista, name="task_create"),
+    path("projects/new", views.project_create, name="project_create"),
+    path("task/new", views.lista, name="task_create"),
+    path("projects/", views.lista, name="project-list"),
+    path("project/", views.lista, name="project"),
     ]
+

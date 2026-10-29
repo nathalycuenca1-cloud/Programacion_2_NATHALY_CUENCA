@@ -6,7 +6,20 @@
     <title>title</title>
 </head>
 <body>
+    <body>
     <p>Bienvenido a {{ titulo }}</p>
-<p>{{ mensaje }}</p>
+    <p>{{ mensaje }}</p>
+    {% if proyectos %}
+    <p>Tienes {{ proyectos|length }} proyectos activos.</p>
+    {% else %}
+    <p>Todavía no tienes proyectos. ¡Crea el primero!</p>
+    {% endif %}
+    <ul>
+    {% for proyecto in proyectos %}
+        <li>{{ proyecto.nombre }} — {{ proyecto.tareas_pendientes }} pendientes</li>
+    {% empty %}
+        <li>No hay proyectos todavía</li>
+    {% endfor %}
+    </ul>
 </body>
 </html>

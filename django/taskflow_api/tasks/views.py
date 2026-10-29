@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+
+from tasks.forms import TaskForm, ProjectForm
+from tasks.models import Project
 
 
 def home(request):
@@ -55,3 +58,34 @@ def leads_like(request):
     }
     return render(request, "leads/leads-like.html")
 
+
+def lista(request):
+    contexto = {
+        "titulo": "TaskFlow",
+        "mensaje": "Organiza tus proyectos y tareas en un solo lugar",
+        "projects": Project.objects.order_by("-created_at"),
+    }
+    return render(request, "projects/projects.html", contexto)
+
+
+def task_create(request):
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save()
+            return redirect("tasks:home")
+    else:
+        form = TaskForm()
+
+    return render(request, "tasks/task_form.html", {"form": form, "modo": "crear"})
+
+def project_create(request):
+    if request.method == "POST":
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            project = form.save()
+            return redirect("tasks:task-lista")
+    else:
+        form = ProjectForm()
+    
+    return render(request, "projects/project_form.html", {"form": form, "modo": "crear"})
