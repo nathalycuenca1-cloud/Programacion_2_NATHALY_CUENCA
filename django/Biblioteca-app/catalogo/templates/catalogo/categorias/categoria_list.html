@@ -2,47 +2,115 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de categorías</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Georgia, serif;
+            background: #dfe8e7;
+            color: #2f3b45;
+        }
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 0;
+        }
+        .panel {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 30px 40px 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 3.2rem;
+            margin: 0 0 16px;
+        }
+        h2 {
+            font-size: 2.4rem;
+            margin: 12px 0 24px;
+        }
+        .link {
+            display: inline-block;
+            color: #0f5ec8;
+            font-size: 1.1rem;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid #5d6b71;
+        }
+        th, td {
+            border: 1px solid #5d6b71;
+            padding: 12px 10px;
+            text-align: left;
+            font-size: 1.08rem;
+        }
+        th {
+            background: rgba(255,255,255,0.18);
+            font-weight: 700;
+        }
+        .actions a {
+            color: #0f5ec8;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .empty {
+            text-align: center;
+            color: #4d5d63;
+        }
+    </style>
 </head>
 <body>
-    <h1>Biblioteca</h1>
-    <h2>Listado de categorías</h2>
-    
-    {% if messages %}
-        {% for mensaje in messages %}
-            <p>{{ mensaje }}</p>
-        {% endfor %}
-    {% endif %}
+    <div class="page">
+        <div class="panel">
+            <h1>Biblioteca</h1>
+            <h2>Listado de categorías</h2>
 
-    <p>
-        <a href="{% url 'categoria_create' %}">
-            Nueva categoría
-        </a>
-    </p>
+            <a class="link" href="{% url 'categoria_create' %}">Nueva categoría</a>
 
-    <table border="1" cellpadding="8">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for categoria in categorias %}
-                <tr>
-                    <td>{{ categoria.id }}</td>
-                    <td>{{ categoria.nombre }}</td>
-                    <td>{{ categoria.descripcion }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="3">
-                        No existen categorías registradas.
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            {% if messages %}
+                {% for mensaje in messages %}
+                    <p>{{ mensaje }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in categorias %}
+                        <tr>
+                            <td>{{ categoria.id }}</td>
+                            <td>{{ categoria.nombre }}</td>
+                            <td>{{ categoria.descripcion }}</td>
+                            <td class="actions">
+                                <a href="{% url 'categoria_update' categoria.id %}">Editar</a>
+                                <a href="{% url 'categoria_delete' categoria.id %}">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="empty">No existen categorías registradas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
