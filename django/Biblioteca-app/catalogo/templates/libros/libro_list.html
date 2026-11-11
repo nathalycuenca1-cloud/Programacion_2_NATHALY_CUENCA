@@ -4,106 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de libros</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Georgia, serif;
-            background: #dfe8e7;
-            color: #2f3b45;
-        }
-        .page {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 30px 0;
-        }
-        .panel {
-            width: 100%;
-            max-width: 1100px;
-            background: rgba(255,255,255,0.12);
-            padding: 30px 28px 30px;
-            box-sizing: border-box;
-        }
-        h1 {
-            font-size: 3.2rem;
-            margin: 0 0 22px;
-        }
-        .new-link {
-            display: inline-block;
-            color: #0f5ec8;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin: 0 0 18px;
-            font-weight: 600;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #5d6b71;
-            background: rgba(255,255,255,0.12);
-        }
-        th, td {
-            border: 1px solid #5d6b71;
-            padding: 12px 10px;
-            text-align: left;
-            font-size: 1.08rem;
-        }
-        th {
-            background: rgba(255,255,255,0.18);
-        }
-        .actions a {
-            color: #0f5ec8;
-            text-decoration: none;
-            margin-right: 10px;
-        }
-        .total {
-            padding: 10px 0 0 0;
-            font-size: 1.05rem;
-            color: #2f3b45;
-        }
-        .empty {
-            text-align: center;
-            color: #4d5d63;
-        }
-    </style>
+    
 </head>
 <body>
-    <div class="page">
-        <div class="panel">
-            <h1>Lista de Libros</h1>
-            <a class="new-link" href="{% url 'create_libro' %}">Crear Nuevo Libro</a>
+    <h1>Lista de libros</h1>
+    {% if messages %}
+    <ul>
+        {% for mensaje in messages %}
+        <li>{{ mensaje }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if perms.catalogo.add_libro %}
+    <button>
+        <a href="{% url 'create_libro' %}">Crear nuevo libro</a>
+    </button>
+    {% endif %}
+    <button>
+        <a href="{% url 'categoria_list' %}">Ver categorías</a>
+    </button>
+    <button>
+        <a href="{% url 'home' %}">Volver al inicio</a>
+    </button>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Autor</th>
-                        <th>Fecha de Publicación</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for libro in libros %}
-                        <tr>
-                            <td>{{ libro.titulo }}</td>
-                            <td>{{ libro.autor }}</td>
-                            <td>{{ libro.fecha_publicacion|date:"d/m/Y" }}</td>
-                            <td class="actions">
-                                <a href="{% url 'update_libro' libro.id %}">Editar</a>
-                                <a href="{% url 'delete_libro' libro.id %}">Eliminar</a>
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="4" class="empty">No hay libros disponibles.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="total">Total de libros: {{ libros|length }}</div>
-        </div>
-    </div>
+    <h2>Buscar Libros</h2>
+    <form method="GET">
+        <P>
+            <label for="buscar">Buscar por titulo, autor o categoria</label>
+            <input type="text" name="pista" id="pista" value="{{pista}}">
+        </P>
+        <p>
+            <label for="categoria">
+                Categoria
+            </label>
+            <select id ="categoria" name="categoria">
+                <option> value="">Todas las categorias</option>
+                {% for categoria in categorias %}
+                <option value="{{categoria.id}}"
+                {% if categoria_id==categoria.id|stringformat:"s" %} selected {% endif %}>
+                {{categoria.nombre}}</option>
+                {% endfor %}
+            </select>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Fecha de publicación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro.titulo }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.fecha_publicacion }}</td>
+                <td>
+                    {% if perms.catalogo.change_libro %}
+                    <a href="{% url 'update_libro' libro.pk %}">Editar</a>
+                    {% endif %}
+                    {% if perms.catalogo.delete_libro %}
+                    <a href="{% url 'delete_libro' libro.pk %}">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay libros disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Total de libros: {{ libros|length }}</td>
+            </tr>
+        </tfoot>
+    </table>
 </body>
 </html>
