@@ -4,78 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if form.instance.pk %}Editar libro{% else %}Nuevo libro{% endif %}</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Georgia, serif;
-            background: #dfe8e7;
-            color: #2f3b45;
-        }
-        .container {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 30px 0;
-        }
-        .card {
-            width: 100%;
-            max-width: 650px;
-            background: rgba(255,255,255,0.15);
-            padding: 30px 30px 20px;
-            box-sizing: border-box;
-        }
-        h1 {
-            font-size: 2.8rem;
-            margin: 0 0 20px;
-        }
-        label {
-            display: block;
-            font-size: 1.1rem;
-            margin: 12px 0 6px;
-        }
-        input, select, textarea {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 10px 12px;
-            border: 1px solid #5d6b71;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        .actions {
-            margin-top: 18px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        button {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        a {
-            color: #0f5ec8;
-            text-decoration: none;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h1>{% if form.instance.pk %}Editar libro{% else %}Nuevo libro{% endif %}</h1>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="actions">
-                    <button type="submit">Guardar</button>
-                    <a href="{% url 'libro_list' %}">Cancelar</a>
-                </div>
-            </form>
-        </div>
-    </div>
+    <h1>{% if form.instance.pk %}Editar libro{% else %}Nuevo libro{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+        <a href="{% url 'libro_list' %}">Cancelar</a>
+    </form>
 </body>
 </html>
