@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de libros</title>
-    
+    <title>Lista de Libros</title>
 </head>
 <body>
-    <h1>Lista de libros</h1>
+    <h1>Lista de Libros</h1>
     {% if messages %}
     <ul>
         {% for mensaje in messages %}
@@ -17,41 +16,42 @@
     {% endif %}
     {% if perms.catalogo.add_libro %}
     <button>
-        <a href="{% url 'create_libro' %}">Crear nuevo libro</a>
+        <a href="{% url 'create_libro' %}">Crear Nuevo Libro</a>
     </button>
     {% endif %}
     <button>
-        <a href="{% url 'categoria_list' %}">Ver categorías</a>
+        <a href="{% url 'categoria_list' %}">Lista de Categorías</a>
     </button>
     <button>
-        <a href="{% url 'home' %}">Volver al inicio</a>
+        <a href="{% url 'home' %}">Atrás</a>
     </button>
 
     <h2>Buscar Libros</h2>
     <form method="GET">
-        <P>
-            <label for="buscar">Buscar por titulo, autor o categoria</label>
-            <input type="text" name="pista" id="pista" value="{{pista}}">
-        </P>
         <p>
-            <label for="categoria">
-                Categoria
-            </label>
-            <select id ="categoria" name="categoria">
-                <option> value="">Todas las categorias</option>
+            <label for="pista">Buscar por titulo, autor o categoria</label>
+            <input type="text" name="pista" id="pista" value="{{ pista }}">
+        </p>
+        <p>
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria">
+                <option value="">Todas las categorias</option>
                 {% for categoria in categorias %}
-                <option value="{{categoria.id}}"
-                {% if categoria_id==categoria.id|stringformat:"s" %} selected {% endif %}>
-                {{categoria.nombre}}</option>
+                <option value="{{ categoria.id }}"
+                {% if categoria_id == categoria.id|stringformat:"s" %} selected {% endif %}>
+                {{ categoria.nombre }}</option>
                 {% endfor %}
             </select>
+        </p>
+        <button type="submit">Buscar</button>
     </form>
-    <table>
+
+    <table border="1">
         <thead>
             <tr>
                 <th>Título</th>
                 <th>Autor</th>
-                <th>Fecha de publicación</th>
+                <th>Fecha de Publicación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -77,10 +77,3 @@
             {% endfor %}
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="4">Total de libros: {{ libros|length }}</td>
-            </tr>
-        </tfoot>
-    </table>
-</body>
-</html>

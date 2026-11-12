@@ -70,8 +70,9 @@
 
             <h2>Menú Principal</h2>
             <ul>
-                <li><a href="/catalogo/catalogo/libros/">Lista de Libros</a></li>
-                <li><a href="/catalogo/catalogo/categorias/">Lista de Categorias</a></li>
+                <li><a href="{% url 'libro_list' %}">Lista de Libros</a></li>
+                <li><a href="{% url 'categoria_list' %}">Lista de Categorías</a></li>
+                <li><a href="{% url 'autor_list' %}">Lista de Autores</a></li>
             </ul>
         </div>
     </div>

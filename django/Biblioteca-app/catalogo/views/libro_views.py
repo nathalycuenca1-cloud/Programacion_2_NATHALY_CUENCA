@@ -11,12 +11,12 @@ from catalogo.models.categoria import Categoria
 def libro_list(request):
     pista = request.GET.get('pista', '').strip()
     categoria_id = request.GET.get('categoria', '').strip()
-    libros = Libro.objects.select_related('categoria_id').all()
+    libros = Libro.objects.select_related('categoria').all()
     if pista:
         libros = libros.filter(
             Q(titulo__icontains=pista) |
             Q(autor__icontains=pista) |
-            Q(categoria_nombre__icontains=pista)
+            Q(categoria__nombre__icontains=pista)
         )
     if categoria_id:
         libros = libros.filter(categoria_id=categoria_id)
@@ -24,14 +24,11 @@ def libro_list(request):
 
     contexto = {
         'libros': libros,
-        'categorias': categorias.objects.all(),
+        'categorias': categorias,
         'pista': pista,
         'categoria_id': categoria_id,
     }
-    return render(request, 'libros/libro_list.html', 
-                  {'libros': libros},
-                   contexto
-                  )
+    return render(request, 'libros/libro_list.html', contexto)
 
 @login_required
 @permission_required('catalogo.add_libro', raise_exception=True)
